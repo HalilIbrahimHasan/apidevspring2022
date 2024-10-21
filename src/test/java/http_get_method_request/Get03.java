@@ -31,6 +31,21 @@ public class Get03 extends JsonPlaceHolderBaseUrl {
             2, 7, and 9 should be among the userIds
      */
 
+    @Test
+    public void test0001(){
+        //set the path params
+        spec.pathParam("bir", "todos");
+
+        Response response = given().spec(spec).when().get("/{bir}");
+
+        response.then().assertThat().statusCode(200).
+                contentType(ContentType.JSON).
+                body("title", hasItem("quis eius est sint explicabo")).
+                body("userId", hasItems(2,7,9)).
+                body("id", hasSize(200));
+
+
+    }
 
 
     @Test
